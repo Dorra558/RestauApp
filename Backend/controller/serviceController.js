@@ -9,11 +9,13 @@ module.exports = {
     // const { name, email } = req.body
    const nom = req.body.nom
     const description = req.body.description
+    const imgUrl = req.body.imgUrl
 
     try {
       service = new Services({
         nom,
-        description
+        description,
+        imgUrl
       })
       await service.save() 
       res.json(service)

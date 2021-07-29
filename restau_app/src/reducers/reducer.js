@@ -9,7 +9,6 @@ export const userReducer = (state = users, action) => {
         
         break;
 
-
     }
 return state
 }

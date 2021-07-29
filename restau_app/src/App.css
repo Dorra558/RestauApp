@@ -1,38 +1,67 @@
-.App {
-  text-align: center;
+
+/* ***********Navbar****************** */
+
+.topbar ul {
+    list-style: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar {
+    background-color: rgba(228, 220, 220, 0.664);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar-brand {
+    color: black;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.nav-item a {
+    color: white;
+    font-size: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+/* ****************carousel******************************* */
+.carousel-item img {
+    height: 33rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.carousel-caption {
+    margin-bottom: 200px;
+    background-color: rgba(29, 28, 28, 0.514);
+}
+
+
+
+/* **********section our offered menus****************** */
+
+
+
+.card-img-overlay h3 {
+    background-color: rgba(255, 255, 0, 0.267);
+}
+
+.card-img-overlay {
+    background-color: rgba(0, 0, 0, 0.486);
+}
+
+.card-img-overlay:hover {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.card-text {
+    display: none;
+}
+
+.card:hover .card-text {
+    display: block;
+  
+    background-color: rgba(56, 54, 54, 0.568);
+
+    cursor: pointer;
+}
+.imageMenu{
+    height: 17rem;
+    width:18rem;
+}
+.bouton{
+background-color: rgb(165, 165, 8) !important; 
 }
