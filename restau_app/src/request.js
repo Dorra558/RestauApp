@@ -25,8 +25,10 @@ Axios.get(GET_MENU_API,{
 }).then(res => res.data)
   
 
-export const postMenu=() =>
-    Axios.post(POST_MENU_API, {
+export const postMenu=() =>    
+    Axios.post(POST_MENU_API,
+        {
         Accept:'application/json',     
-    'Content-Type': 'application/json',
-}).then(res => res.data)
+       'Content-Type': 'application/json',
+        })
+        .then(res => res.data)

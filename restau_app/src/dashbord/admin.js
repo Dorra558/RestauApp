@@ -1,25 +1,24 @@
 import React, {useState} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {newMenu} from '../actions/dashboardAction'
 import {Form,Button, Container, Row, Col} from 'react-bootstrap'
 
 
 
-// const AddNewMenu = () => {
-export default function Dashboard() {
-    const initialMenuState = {
-        id: null,
+//  const AddNewMenu = () => {
+ export default function Dashboard() {
+     const initialMenuState = {
         nom: "",
         description: "",
         imgUrl: "",
-        published: false
+
     };
     const [menu, setMenu] = useState(initialMenuState);
     const [submitted, setSubmitted] = useState(false);
 
     const dispatch = useDispatch()
     
-    const handleInputChange = event => {
+    const handleInputChange = (event) => {
         const { name, value } = event.target;
         setMenu({
             ...menu,
@@ -31,23 +30,23 @@ export default function Dashboard() {
         const { nom, imgUrl, description } = menu;
 
         dispatch(newMenu(nom, description, imgUrl))
-            .then(data => {
-                setMenu({
-                    id: data.id,
-                    nom: data.title,
-                    description: data.description,
-                    imgUrl: data.imgUrl,
-                    published: data.published
-                });
-          
-                setSubmitted(true);
-
+              setSubmitted(true);
+            // .then(data => {
+            //     setMenu({
+                    
+            //         nom: data.title,
+            //         description: data.description,
+            //         imgUrl: data.imgUrl,
                 
-                console.log(data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
+            //     });
+          
+            //     setSubmitted(true);
+
+            //     console.log("hhhhhhhh",data);
+            // })
+            // .catch(e => {
+            //     console.log(e);
+            // });
     };
     const addMenu = () => {
         setMenu(initialMenuState);
@@ -72,21 +71,21 @@ export default function Dashboard() {
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
                             <Form>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Control type="text" id="nom" value={menu.nom} onChange={handleInputChange} name="nom" placeholder="Enter the name of dish " />
+                                <Form.Group className="mb-3">
+                                    <Form.Control type="text"  value={menu.nom} onChange={handleInputChange} name="nom" placeholder="Enter the name of dish " />
                                 </Form.Group>
 
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <Form.Control type="text" id="urlImg" value={menu.urlImg} onChange={handleInputChange} name="urlImg" placeholder="Enter the url image" />
+                                <Form.Group className="mb-3" >
+                                    <Form.Control type="text" value={menu.urlImg} onChange={handleInputChange} name="urlImg" placeholder="Enter the url image" />
                                 </Form.Group>
                             
-                                <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <Form.Control type="text" id="description" value={menu.description} onChange={handleInputChange} name="description" placeholder="Description" />
+                                <Form.Group className="mb-3">
+                                    <Form.Control type="text"  value={menu.description} onChange={handleInputChange} name="description" placeholder="Description" />
                                 </Form.Group>
                             
-                                <button onClick={saveMenu} className="btn btn-success">
+                                <Button onClick={saveMenu}>
                                     Add new menu
-                                </button>
+                                </Button>
                             </Form>
                         </Col>
                     </Row>

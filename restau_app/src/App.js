@@ -2,9 +2,9 @@
 import './App.css';
 import Menus from './components/home';
 
-import Navigationbar from './components/navbar';
 
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Dashboard from './dashbord/admin';
 
 function App() {

@@ -9,13 +9,14 @@ import Navigationbar from './navbar'
 export default function Menus() {
 
      const dispatch = useDispatch()
-     const menus = useSelector(state=>state.servicestore)
+    const datas = useSelector(state => state.menuReducer.datas)
+    const loading = useSelector(state => state.menuReducer.loading)
 
 
      useEffect(() => {
         dispatch(getMenu());
-      },[]);
-      console.log(menus, "did we ?");
+      },[dispatch]);
+      console.log(datas, "did we ?");
 
     return (
         <div>
@@ -64,8 +65,8 @@ export default function Menus() {
             <h1 className="py-5 container">Liste des menus</h1>
             
             <div className="pb-5 d-flex justify-content-around">
-            {menus.map((el,key) => (
-            <Card className="  text-white">
+            {datas.map((el,key) => (
+            <Card className="  text-white" key={key}>
                 <Card.Img src={el.imgUrl} alt="Card image" className="imageMenu" />
                 <Card.ImgOverlay>
                     <Card.Title><h3>{el.nom}</h3></Card.Title>

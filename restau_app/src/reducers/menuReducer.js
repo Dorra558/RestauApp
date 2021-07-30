@@ -1,16 +1,28 @@
 
-const menus =[]
-export const menuReducer = (state = menus, action) => {
 
-    switch(action.type) {
-        case "GET_MENU_SUCCEDED":
+const ADD_MENU = "ADD_MENU"
+const GET_MENU = "GET_MENU"
+const initialState = {
+      datas : [],
+      loading:true
+}
 
-            return action.payload
+export const menuReducer = (state = initialState, action) => {
+    const {type,payload} = action
+    switch (type) {
+        case GET_MENU :
+
+            return {...state,
+                datas: payload,
+                loading: false
+            }
         
-            break;
-        case "POST_MENU_SUCCEDED":
-            return [...state, action.payload]
-            break;
+        
+        case ADD_MENU:
+            return {
+                ...state,
+                datas: [...state.datas, payload]
+            }
     }       
 return state
 }
