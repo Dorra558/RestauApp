@@ -1,22 +1,22 @@
 
 
-import axios from 'axios';
-import { postnewMenu } from '../services/api';
+// import axios from 'axios';
+// import { postnewMenu } from '../services/api';
 
-const ADD_MENU = "ADD_MENU"
-export const newMenu=(nom,imgUrl,description )=> async (dispatch) =>{
-    try{
-        const res=await postnewMenu (nom,imgUrl,description);
-        dispatch ({
-            type:ADD_MENU,
-            payload:res.data
-        })
-        console.log("payload")
-    }
-    catch (error) {
-     console.log(error);
-    }
-}
+// import {ADD_MENU} from './types'
+// export const newMenu=(nom,imgUrl,description )=> async (dispatch) =>{
+//     try{
+//         const res=await postnewMenu (nom,imgUrl,description);
+//         dispatch ({
+//             type:ADD_MENU,
+//             payload:res.data
+//         })
+//         console.log("payload")
+//     }
+//     catch (error) {
+//      console.log(error);
+//     }
+// }
 
 // export function newMenu() {
 //     return dispatch => {

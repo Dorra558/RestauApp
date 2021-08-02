@@ -8,14 +8,13 @@ module.exports = {
   addService: async (req, res) => {
     // const { name, email } = req.body
    const nom = req.body.nom
-    const description = req.body.description
-    const imgUrl = req.body.imgUrl
-
+   const imgUrl = req.body.imgUrl
+   const description = req.body.description
     try {
       service = new Services({
         nom,
+        imgUrl,
         description,
-        imgUrl
       })
       await service.save() 
       res.json(service)

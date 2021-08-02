@@ -1,7 +1,10 @@
-import React, {useState} from 'react'
-import { useDispatch } from 'react-redux'
-import {newMenu} from '../actions/dashboardAction'
-import {Form,Button, Container, Row, Col} from 'react-bootstrap'
+import React, {useState, useEffect} from 'react'
+import { useDispatch,useSelector} from 'react-redux'
+import {newMenu, getMenu, deleteMenu} from '../actions/actionMenu'
+import {Form,Button, Card, Container, Row, Col} from 'react-bootstrap'
+import UpdateMenu from './updateMenu';
+
+
 
 
 
@@ -9,12 +12,15 @@ import {Form,Button, Container, Row, Col} from 'react-bootstrap'
  export default function Dashboard() {
      const initialMenuState = {
         nom: "",
-        description: "",
         imgUrl: "",
+        description: "",
+     };
+     
 
-    };
+     
+
     const [menu, setMenu] = useState(initialMenuState);
-    const [submitted, setSubmitted] = useState(false);
+    // const [submitted, setSubmitted] = useState(false);
 
     const dispatch = useDispatch()
     
@@ -24,19 +30,20 @@ import {Form,Button, Container, Row, Col} from 'react-bootstrap'
             ...menu,
             [name]: value
         });
-        console.log("add new menu",menu)
+        console.log("add new menu", menu)
     };
+     
     const saveMenu = () => {
         const { nom, imgUrl, description } = menu;
 
-        dispatch(newMenu(nom, description, imgUrl))
-              setSubmitted(true);
+      dispatch(newMenu(nom, imgUrl,description))
+            //   setSubmitted(true);
             // .then(data => {
             //     setMenu({
                     
             //         nom: data.title,
-            //         description: data.description,
             //         imgUrl: data.imgUrl,
+            //         description: data.description,
                 
             //     });
           
@@ -48,49 +55,68 @@ import {Form,Button, Container, Row, Col} from 'react-bootstrap'
             //     console.log(e);
             // });
     };
-    const addMenu = () => {
-        setMenu(initialMenuState);
-        setSubmitted(false);
-    };
-        
+ 
+ 
 
-  
+    const datas = useSelector(state => state.menuReducer.datas)
+          useEffect(() => {
+        dispatch(getMenu());
+      },[dispatch]);
+      console.log(datas, "get the cards");
+     
+     const deleteItem = (id) => {
+         dispatch(deleteMenu(id))
+         console.log("salut",id)
+     }
+
     return (
         <div className="submit-form my-5">
  
-            {submitted ? (
-                    
-                <div>
-                    <h4>You submitted successfully!</h4>
-                    <button className="btn btn-success" onClick={addMenu}>
-                        Add
-                    </button>
-                </div>
-            ) : (
+          
                 <Container>
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
                             <Form>
                                 <Form.Group className="mb-3">
-                                    <Form.Control type="text"  value={menu.nom} onChange={handleInputChange} name="nom" placeholder="Enter the name of dish " />
+                                    <Form.Control type="text"  id="nom" value={menu.nom} onChange={handleInputChange} name="nom" placeholder="Enter the name of dish " />
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" >
-                                    <Form.Control type="text" value={menu.urlImg} onChange={handleInputChange} name="urlImg" placeholder="Enter the url image" />
+                                    <Form.Control type="text" id="imgUrl" value={menu.imgUrl} onChange={handleInputChange} name="imgUrl" placeholder="Enter the url image" />
                                 </Form.Group>
                             
                                 <Form.Group className="mb-3">
-                                    <Form.Control type="text"  value={menu.description} onChange={handleInputChange} name="description" placeholder="Description" />
+                                    <Form.Control type="text" id="description" value={menu.description} onChange={handleInputChange} name="description" placeholder="Description" />
                                 </Form.Group>
                             
-                                <Button onClick={saveMenu}>
+                                <button onClick={()=>saveMenu()} className="btn btn-success"> 
                                     Add new menu
-                                </Button>
+                                </button>
                             </Form>
                         </Col>
                     </Row>
                 </Container>
-            )}
+            
+
+        {/*************** get cards ***********/}
+            <div className="py-5 d-flex justify-content-around container">
+            {datas.map((el,key) => (
+            <Card className="  text-white" key={key}>
+                <Card.Img src={el.imgUrl} alt="Card image" className="imageMenu" />
+                <Card.ImgOverlay>
+                    <Card.Title><h3>{el.nom}</h3></Card.Title>
+                    <Card.Text className="mt-5  ">
+                     <p className="text-align-center"> {el.description}</p>
+                            <button type="button" class="btn btn-outline-danger p-3">Order Now</button>
+                            <div className="py- d-flex justify-content-around">
+                                <UpdateMenu />
+                                <Button onClick={() => deleteItem(el._id)}><i class="far fa-trash-alt"></i></Button>
+                            </div>
+                    </Card.Text>
+                </Card.ImgOverlay>
+            </Card>
+            ))}
+            </div>
         </div>
                 
     )

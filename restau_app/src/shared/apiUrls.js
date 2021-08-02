@@ -10,5 +10,5 @@ export const DELETE_USER_API = `${SERVER_BASE_API}fabrique/:id`
 
 export const GET_MENU_API = `${SERVER_BASE_API}service/getServices`
 export const POST_MENU_API = `${SERVER_BASE_API}service/addServices`
-
+export const PUT_MENU_API = `${SERVER_BASE_API}service/${id}`
 
